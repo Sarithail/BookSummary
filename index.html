@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookSummarizer</title>
+  <link rel="stylesheet" href="styles.css" />
+  
+</head>
+<body>
+
+
+
+ <header>
+    <div class="logo"><span>BookSummarizer</span></div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Summarizer</a></li>
+        <li><a href="#">History</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<main>
+    <div class="hero">
+      <div class="overlay">
+        <div class="content">
+          <h1>Summarize Books<br>with AI Magic</h1>
+          <p>Turn dense books into concise summaries in seconds. Powered by cutting-edge AI, designed for book lovers.</p>
+         <button onclick="openSummarizer()">Start Summarizing</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+ 
+
+  <section class="features">
+    <div class="feature">
+      <h2>⚡ Fast Summaries</h2>
+      <p>Get key insights in minutes.</p>
+    </div>
+    <div class="feature">
+      <h2>🎯 Accurate AI</h2>
+      <p>Precise and reliable results.</p>
+    </div>
+    <div class="feature">
+      <h2>🧠 Easy to Use</h2>
+      <p>Intuitive for all users.</p>
+    </div>
+  </section>
+
+<section class="top-features">
+  <h2>✨ Explore Our Top Features</h2>
+  <div class="top-feature-cards">
+    <div class="top-feature">
+      <img src="page-flip.jpg" alt="Page Flipping Book" />
+     
+      
+      <h3>Super Fast Sync</h3>
+      <p>Lightning speed sync across devices.</p>
+    </div>
+    <div class="top-feature">
+      <img src="book-stack.jpg" alt="Stack of Books" />
+      <h3>Smart Discovery</h3>
+      <p>AI recommends the next best book.</p>
+    </div>
+    <div class="top-feature">
+      <img src="offline-mode.jpg" alt="Typewriter with Lightbulb" />
+      <h3>Offline Mode</h3>
+      <p>Access everything without internet.</p>
+    </div>
+  </div>
+</section>
+<section id="summarizer-section" style="display: none; padding: 50px; background: #0e1a2b; color: white;">
+  <h1 style="font-size: 2.5rem; text-align: center;">Generate Your Book Summary</h1>
+  <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
+    
+    <!-- Input Section -->
+    <div style="flex: 1; min-width: 45%; background: #131f33; padding: 20px; border-radius: 12px;">
+      <h2 style="color: #00bcd4;">Input Book Content</h2>
+      <textarea id="bookInput" placeholder="Paste book text here..." rows="10" style="width: 100%; background: #0e1a2b; color: white; border: 1px solid #333; border-radius: 10px; padding: 10px;"></textarea>
+      <p style="margin-top: 10px;">Or upload a file</p>
+      <input type="file" id="fileInput" style="margin-bottom: 20px;" />
+      <button onclick="generateSummary()" style="background: linear-gradient(to right, #00c6ff, #7b2ff7); color: white; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem;">Generate Summary</button>
+    </div>
+
+    <!-- Summary Section -->
+    <div style="flex: 1; min-width: 45%; background: #131f33; padding: 20px; border-radius: 12px;">
+      <h2 style="color: #00bcd4;">Summary</h2>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="your-summary-image-path.png" alt="Book Summary" style="width: 120px; border-radius: 8px;">
+        <p id="summaryOutput" style="color: #ccc;">Your summary will appear here…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <footer>
+    <p>© 2025 BookSummarizer. Built with AI and Love.</p>
+  </footer>
+<script>
+  function openSummarizer() {
+    window.location.href = "#summarizer-section";
+    document.getElementById("summarizer-section").style.display = "block";
+    window.scrollTo({
+      top: document.getElementById("summarizer-section").offsetTop,
+      behavior: 'smooth'
+    });
+  }
+</script>
+
+
+<script>
+  function generateSummary() {
+    const textArea = document.getElementById("bookInput");
+    const fileInput = document.getElementById("fileInput");
+    const summaryOutput = document.getElementById("summaryOutput");
+
+    if (fileInput.files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        summaryOutput.innerText = summarizeText(text);
+      };
+      reader.readAsText(fileInput.files[0]);
+    } else if (textArea.value.trim() !== "") {
+      summaryOutput.innerText = summarizeText(textArea.value);
+    } else {
+      alert("Please input book text or upload a file.");
+    }
+  }
+
+  function summarizeText(text) {
+    // Basic mock summary logic (replace with real backend logic if needed)
+    const sentences = text.split('.').filter(Boolean);
+    return sentences.slice(0, 3).join('. ') + (sentences.length > 3 ? '...' : '');
+  }
+</script>
+
+
+  <script src="script.js"></script>
+  
+</body>
+</html>
